@@ -31,4 +31,4 @@ Array Hash Table
 
 
 ## Similar Questions
-- [3Sum](https://github.com/xuxiaoleilancy/xl-notes/leetcode/algorithm/3sum.md)
+- [3Sum](https://github.com/xuxiaoleilancy/xl-notes/blob/master/leetcode/algorithm/3sum.md)
