@@ -2,16 +2,22 @@
 
 ## Description
 
-Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
 
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
+Note:
+
+The solution set must not contain duplicate triplets.
 
 Example:
 
-Given nums = [2, 7, 11, 15], target = 9,
+Given array nums = [-1, 0, 1, 2, -1, -4],
 
-Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+
 
 ## Solution
 
@@ -27,8 +33,8 @@ return [0, 1].
 
 ## Related Topics
 
-Array Hash Table
+Array TWo Pointers
 
 
 ## Similar Questions
-- [3Sum](https://github.com/xuxiaoleilancy/xl-notes/leetcode/algorithm/3sum.md)
+- [3Sum](https://github.com/xuxiaoleilancy/xl-notes/leetcode/algorithm/two_sum.md)
