@@ -37,4 +37,4 @@ Array TWo Pointers
 
 
 ## Similar Questions
-- [2Sum](https://github.com/xuxiaoleilancy/xl-notes/leetcode/algorithm/two_sum.md)
+- [2Sum](https://github.com/xuxiaoleilancy/xl-notes/blob/master/leetcode/algorithm/two_sum.md)
