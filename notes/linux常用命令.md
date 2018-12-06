@@ -1,16 +1,7 @@
 <!-- GFM-TOC -->
-* [top](#top)
-    * [查看某个进程内部线程占用情况](#查看某个进程内部线程占用情况)
-* [watch](#watch)
-    * [重复执行某一个命令](#重复执行某一个命令)
-* [ps](#ps)
-    * [ps -To](#ps -To)
-    * [ps -mp](#开机检测程序)
-* [intel_gpu_tools](#intel_gpu_tools)
-    * [实时查看gpu使用情况](#实时查看gpu使用情况)
-    * [intel_gpu_abrt](#intel_gpu_abrt)
-    * [总结命令行的CPU和GPU等使用情况](#总结命令行的CPU和GPU等使用情况)
+[TOC]
 <!-- GFM-TOC -->
+[TOC]
 
 # top
 
