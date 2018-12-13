@@ -1,7 +1,7 @@
 <!-- GFM-TOC -->
-* [一、gitlab环境配置（windows)](#gitlab环境配置（windows))
-    * [快捷键](#快捷键)
-    * [求助](#求助)
+* [一、环境配置](#环境配置)
+    * [gitlab](#gitlab)
+    * [windows](#windows)
     * [关机](#关机)
     * [PATH](#path)
     * [sudo](#sudo)
@@ -67,18 +67,15 @@
 <!-- GFM-TOC -->
 
 
-# 一、gitlab环境配置（windows)
+# 一、环境配置
 
-## TortoiseGit免密码
+## gitlab
 
+### 1. --winodws
+
+TortoiseGit免密码
 - PuTTy Key Generator 生成 密钥对；
 - TortoiseGit setting-> Git -> Remote 中 putty key 填入保存的私钥文件即可
-
-## 求助
-
-### 1. --help
-
-指令的基本用法与选项介绍。
 
 ### 2. man
 
@@ -182,7 +179,7 @@ GNU 计划，译为革奴计划，它的目标是创建一套完全自由的操�
 - [Choose an open source license](https://choosealicense.com/)
 - [如何选择开源许可证？](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html)
 
-# 二、磁盘
+# 二、submodule
 
 ## 磁盘接口
 
