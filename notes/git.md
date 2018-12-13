@@ -67,13 +67,12 @@
 <!-- GFM-TOC -->
 
 
-# 一、常用操作以及概念
+# 一、gitlab环境配置（windows)
 
-## 快捷键
+## TortoiseGit免密码
 
-- Tab：命令和文件名补全；
-- Ctrl+C：中断正在运行的程序；
-- Ctrl+D：结束键盘输入（End Of File，EOF）
+- PuTTy Key Generator 生成 密钥对；
+- TortoiseGit setting-> Git -> Remote 中 putty key 填入保存的私钥文件即可
 
 ## 求助
 
