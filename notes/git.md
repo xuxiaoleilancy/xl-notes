@@ -1,106 +1,42 @@
 <!-- GFM-TOC -->
 * [一、环境配置](#环境配置)
     * [gitlab](#gitlab)
-    * [windows](#windows)
-    * [关机](#关机)
-    * [PATH](#path)
-    * [sudo](#sudo)
-    * [包管理工具](#包管理工具)
-    * [发行版](#发行版)
-    * [VIM 三个模式](#vim-三个模式)
-    * [GNU](#gnu)
-    * [开源协议](#开源协议)
-* [二、磁盘](#二磁盘)
-    * [磁盘接口](#磁盘接口)
-    * [磁盘的文件名](#磁盘的文件名)
-* [三、分区](#三分区)
-    * [分区表](#分区表)
-    * [开机检测程序](#开机检测程序)
-* [四、文件系统](#四文件系统)
-    * [分区与文件系统](#分区与文件系统)
-    * [组成](#组成)
-    * [文件读取](#文件读取)
-    * [磁盘碎片](#磁盘碎片)
-    * [block](#block)
-    * [inode](#inode)
-    * [目录](#目录)
-    * [日志](#日志)
-    * [挂载](#挂载)
-    * [目录配置](#目录配置)
-* [五、文件](#五文件)
-    * [文件属性](#文件属性)
-    * [文件与目录的基本操作](#文件与目录的基本操作)
-    * [修改权限](#修改权限)
-    * [文件默认权限](#文件默认权限)
-    * [目录的权限](#目录的权限)
-    * [链接](#链接)
-    * [获取文件内容](#获取文件内容)
-    * [指令与文件搜索](#指令与文件搜索)
-* [六、压缩与打包](#六压缩与打包)
-    * [压缩文件名](#压缩文件名)
-    * [压缩指令](#压缩指令)
-    * [打包](#打包)
-* [七、Bash](#七bash)
-    * [特性](#特性)
-    * [变量操作](#变量操作)
-    * [指令搜索顺序](#指令搜索顺序)
-    * [数据流重定向](#数据流重定向)
-* [八、管道指令](#八管道指令)
-    * [提取指令](#提取指令)
-    * [排序指令](#排序指令)
-    * [双向输出重定向](#双向输出重定向)
-    * [字符转换指令](#字符转换指令)
-    * [分区指令](#分区指令)
-* [九、正则表达式](#九正则表达式)
-    * [grep](#grep)
-    * [printf](#printf)
-    * [awk](#awk)
-* [十、进程管理](#十进程管理)
-    * [查看进程](#查看进程)
-    * [进程状态](#进程状态)
-    * [SIGCHLD](#sigchld)
-    * [wait()](#wait)
-    * [waitpid()](#waitpid)
-    * [孤儿进程](#孤儿进程)
-    * [僵尸进程](#僵尸进程)
-* [参考资料](#参考资料)
+* [二、git的使用](#git的使用)
+    * [submodule](##1.submodule）
 <!-- GFM-TOC -->
 
 
 # 一、环境配置
 
-## gitlab
-
-### 1. --winodws
-##### 1.1 TortoiseGit
+## 1. --winodws
+### 1.1 TortoiseGit
 
 TortoiseGit免密码
 - PuTTy Key Generator 生成 密钥对；
 - TortoiseGit setting-> Git -> Remote 中 putty key 填入保存的私钥文件即可
 
-### 2. linux
+## 2. linux
 ### 2.1 git的安装
 
 sudo apt-get install git
 git --version
 
-### 3. mac
+## 3. mac
 
 mac默认带有git环境，不需要配置。
 
+# git的使用
 
-## git的使用
+## 1. submodule
 
-### 1. submodule
-
-#### 1.1 添加submodules
+### 1.1 添加submodules
 git submoduel add ****1.git
 git submoduel add ****2.git
 
-#### 1.2 clone带有submodule的仓库
+### 1.2 clone带有submodule的仓库
 git submodule init
 git submoduel update
 
-#### 1.3 修改submodule
+### 1.3 修改submodule
 submodule clone之后不在任何分支上，所以修改前需要先切换到要修改的分支上
 git checkout master
