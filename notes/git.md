@@ -3,9 +3,9 @@
     * [gitlab](#gitlab)
 * [二、git的使用](#git的使用)
     * [submodule](##submodule）
-         * [添加submodules](###添加submodules）
-         * [clone带有submodule的仓库](###clone带有submodule的仓库）
-         * [修改submodule](###修改submodule）
+    * [添加submodules](###添加submodules）
+    * [clone带有submodule的仓库](###clone带有submodule的仓库）
+    * [修改submodule](###修改submodule）
 <!-- GFM-TOC -->
 
 
@@ -28,7 +28,7 @@ git --version
 
 mac默认带有git环境，不需要配置。
 
-# git的使用
+# 二、git的使用
 
 ## 1. submodule
 
