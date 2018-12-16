@@ -2,7 +2,10 @@
 * [一、环境配置](#环境配置)
     * [gitlab](#gitlab)
 * [二、git的使用](#git的使用)
-    * [submodule](##1.submodule）
+    * [submodule](##submodule）
+         * [添加submodules](###添加submodules）
+         * [clone带有submodule的仓库](###clone带有submodule的仓库）
+         * [修改submodule](###修改submodule）
 <!-- GFM-TOC -->
 
 
