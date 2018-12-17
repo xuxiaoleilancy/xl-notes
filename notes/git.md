@@ -43,3 +43,13 @@ git submoduel update
 ### 1.3 修改submodule
 submodule clone之后不在任何分支上，所以修改前需要先切换到要修改的分支上
 git checkout master
+
+### 1.4 删除submodule
+git没有提供删除submodule的命令，可通过以下几步彻底删除submodule
+
+#### 1.4.1 删除物理文件夹
+#### 1.4.2 删除.gitmodules文件中相关内容
+#### 1.4.3 删除.git 目录中 config文件相关内容
+#### 1.4.3 删除.git 目录中子目录modules中相关目录
+
+git submodule的删除，如果不彻底，在重新添加submodule时很容易出现错误“A git directory for 'rrtcvideo' is found locally with remote”。可按照以上目录逐步进行。
