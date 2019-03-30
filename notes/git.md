@@ -68,3 +68,10 @@ git config user.email "xxx"
 
 
 ###1.6 git stash 
+在多人协同开发的时候，往往会出现push本地修改时，告知先让pull远程仓库代码。如果这个时候你直接pull，那很可能你本地的修改就全部丢失了。怎么办呢？git 提供了stash(暂存)的功能。步骤如下：
+1. git stash （暂存)
+2. git pull 拉取远程仓库代码
+3. git stash pop stash{*}
+4. git add **
+5. git commit -m "xxx"
+6. git push 
