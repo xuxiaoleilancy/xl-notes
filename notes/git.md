@@ -78,3 +78,6 @@ git config user.email "xxx"
 5. git commit -m "xxx"
 6. git push 
 这样你的本地修改就完美的保留下来了
+
+
+###1.7 git status 查看本地git修改状态
