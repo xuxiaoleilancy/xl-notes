@@ -64,3 +64,7 @@ git config --unset user.email
 配置新的用户名
 git config user.email "xxx"
 git config user.email "xxx"
+
+
+
+###1.6 git stash 
