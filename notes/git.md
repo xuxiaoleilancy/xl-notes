@@ -53,3 +53,14 @@ git没有提供删除submodule的命令，可通过以下几步彻底删除submo
 #### 1.4.3 删除.git 目录中子目录modules中相关目录
 
 git submodule的删除，如果不彻底，在重新添加submodule时很容易出现错误“A git directory for 'rrtcvideo' is found locally with remote”。可按照以上目录逐步进行。
+
+
+### 1.5 修改默认用户名
+
+在git commit 之前
+
+git config --unset user.name
+git config --unset user.emial
+
+git config user.name "xxx"
+git config user.email "xxx"
