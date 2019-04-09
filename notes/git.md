@@ -55,7 +55,7 @@ git没有提供删除submodule的命令，可通过以下几步彻底删除submo
 git submodule的删除，如果不彻底，在重新添加submodule时很容易出现错误“A git directory for 'rrtcvideo' is found locally with remote”。可按照以上目录逐步进行。
 
 
-###1.5 用户名配置
+### 1.5 用户名配置
 
 解除之前配置的默认用户名
 git config --unset user.name
@@ -67,7 +67,7 @@ git config user.email "xxx"
 
 
 
-###1.6 git stash 
+### 1.6 git stash 
 
 在多人协同开发的时候，往往会出现push本地修改时，告知先让pull远程仓库代码---这种情况多发生于windows平台的git gui操作.
 如果这个时候你直接pull，那很可能你本地的修改就全部丢失了。怎么办呢？git 提供了stash--暂存的功能。步骤如下：
@@ -80,11 +80,11 @@ git config user.email "xxx"
 这样你的本地修改就完美的保留下来了
 
 
-###1.7 git status
+### 1.7 git status
 
 查看本地git修改状态
 
-###1.8 版本回滚
+### 1.8 版本回滚
 #### 1.8.1 问题描述
 
 在利用github实现多人合作程序开发的过程中，我们有时会出现错误提交的情况，此时我们希望能撤销提交操作，让程序回到提交前的样子，本文总结了两种解决方法：回退（reset）、反做（revert）。
