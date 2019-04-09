@@ -1,17 +1,17 @@
 <!-- GFM-TOC -->
-* [一、环境配置](#环境配置)
-    * [gitlab](#gitlab)
-* [二、git的使用](#git的使用)
-    * [submodule](##submodule）
-    * [添加submodules](###添加submodules）
-    * [clone带有submodule的仓库](###clone带有submodule的仓库）
-    * [修改submodule](###修改submodule）
+* [一、环境配置](#一-环境配置)
+    * [winodws](#1-winodws)
+* [二、git的使用](#二-git的使用)
+    * [submodule](#1-submodule)
+    * [添加submodules](#11-添加submodules)
+    * [clone带有submodule的仓库](#12-clone带有submodule的仓库)
+    * [修改submodule](#13-修改submodule)
 <!-- GFM-TOC -->
 
 
-# 一、环境配置
+# 一 环境配置
 
-## 1. --winodws
+## 1 winodws
 ### 1.1 TortoiseGit
 
 TortoiseGit免密码
@@ -28,9 +28,9 @@ git --version
 
 mac默认带有git环境，不需要配置。
 
-# 二、git的使用
+# 二 git的使用
 
-## 1. submodule
+## 1 submodule
 
 ### 1.1 添加submodules
 git submoduel add ****1.git
