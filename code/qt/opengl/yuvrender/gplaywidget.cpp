@@ -52,7 +52,7 @@ void CPlayWidget::PlayOneFrame()
         m_nVideoH = 1080;
         m_pBufYuv420p = new unsigned char[nLen];
         qDebug("CPlayWidget::PlayOneFrame new data memory. Len=%d width=%d height=%d\n",
-               nLen, m_nVideoW, m_nVideoW);
+               nLen, m_nVideoW, m_nVideoH);
     }
     //将一帧yuv图像读到内存中
     if(NULL == m_pYuvFile)
@@ -79,8 +79,8 @@ void CPlayWidget::updateFrame(unsigned char *pData)
 
 void CPlayWidget::my_repaint()
 {
-    repaint();
-    QApplication::processEvents();
+    update();
+    //QApplication::processEvents();
 }
 void CPlayWidget::initializeGL()
 {
@@ -199,8 +199,8 @@ void CPlayWidget::resizeGL(int w, int h)
 }
  void CPlayWidget::paintGL()
  {
-     QElapsedTimer timer;
-     timer.start();
+//     QElapsedTimer timer;
+//     timer.start();
      static int i = 0;
      i++;
      qDebug()<<"paintGL : "<<i<<endl;
@@ -255,7 +255,7 @@ void CPlayWidget::resizeGL(int w, int h)
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 
-    qDebug() << "The paintgl operation took " << timer.elapsed() << "milliseconds";
+    qDebug() << "The paintgl operation took " /*timer.elapsed()*/ << "milliseconds";
     return;
  }
 

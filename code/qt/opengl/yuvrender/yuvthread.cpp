@@ -30,7 +30,7 @@ void YuvThread::run()
         if(feof(m_pYuvFile)){
             fseek(m_pYuvFile,0,0);
         }
-        msleep(33);
+        msleep(10);
     }
 }
 
@@ -51,7 +51,7 @@ void YuvThread::PlayOneFrame()
     {
         m_pBufYuv420p = new unsigned char[nLen];
         qDebug("CPlayWidget::PlayOneFrame new data memory. Len=%d width=%d height=%d\n",
-               nLen, m_nVideoW, m_nVideoW);
+               nLen, m_nVideoW, m_nVideoH);
     }
     //将一帧yuv图像读到内存中
     if(NULL == m_pYuvFile)
@@ -61,18 +61,18 @@ void YuvThread::PlayOneFrame()
     }
     fread(m_pBufYuv420p, 1, nLen, m_pYuvFile);
 
-    int look_up[256];
-      for (int i = 0; i < 256; i++) {
-        int val = i + 30;
-        look_up[i] = ((((val < 0) ? 0 : val) > 255) ? 255 : val);
-      }
+//    int look_up[256];
+//      for (int i = 0; i < 256; i++) {
+//        int val = i + 30;
+//        look_up[i] = ((((val < 0) ? 0 : val) > 255) ? 255 : val);
+//      }
 
-      unsigned char* temp_ptr = m_pBufYuv420p;
+//      unsigned char* temp_ptr = m_pBufYuv420p;
 
-      for (int i = 0; i < m_nVideoW*m_nVideoH; i++) {
-        *temp_ptr = static_cast<unsigned char>(look_up[*temp_ptr]);
-        temp_ptr++;
-      }
+//      for (int i = 0; i < m_nVideoW*m_nVideoH; i++) {
+//        *temp_ptr = static_cast<unsigned char>(look_up[*temp_ptr]);
+//        temp_ptr++;
+//      }
     emit newFrame(m_pBufYuv420p);
 }
 
@@ -97,7 +97,7 @@ void UpdateThread::run()
         qDebug()<<" UpdateThread: i =  "<<i<<endl;
         i++;
         emit repaint();
-        msleep(15);
+        msleep(10);
     }
     qDebug() << "The updateThread took " << timer.elapsed() << "milliseconds";
 }

@@ -4,6 +4,7 @@
 #include <QOpenGLBuffer>
 #include <QMouseEvent>
 
+#include <QElapsedTimer>
 
 #include "ropengltexture.h"
 
@@ -42,6 +43,8 @@ m_pBufYuv420p1 = NULL;
     _pLabel->setGeometry(geometry());
     _pLabel->show();
 
+
+    _iFrame = 0;
 }
 ThreadOpenglWidget::~ThreadOpenglWidget()
 {
@@ -65,7 +68,7 @@ void ThreadOpenglWidget::PlayOneFrame()
     {
         m_pBufYuv420p = new unsigned char[nLen];
         qDebug("CPlayWidget::PlayOneFrame new data memory. Len=%d width=%d height=%d\n",
-               nLen, m_nVideoW, m_nVideoW);
+               nLen, m_nVideoW, m_nVideoH);
     }
     //将一帧yuv图像读到内存中
     if(NULL == m_pYuvFile)
@@ -225,7 +228,7 @@ void ThreadOpenglWidget::resizeGL(int w, int h)
 
     QOpenGLWidget::resizeGL(w,h);
     //设置视口
-    //glViewport(0,0, w,h);
+    glViewport(0,0, w,h);
 }
 
 
@@ -275,8 +278,24 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
 
      //glViewport(width()/2,0, width()/2,height()/2);
 
+     if( _iFrame == 0 ){
+         _timer.start();
+     }
+     ++_iFrame;
+     if( _iFrame == 900){
+         double fElapsed = _timer.elapsed()/1000.0;
+         qDebug()<<"900 frames took="<<fElapsed<<",fps="<<1.0*_iFrame/fElapsed<<endl;
+         _iFrame = 0;
+         _timer.restart();
+     }
+     int winW = this->width();
+     int winH = this->height();
 
-     if( m_bEnableScissor )     glEnable(GL_SCISSOR_TEST);
+     glViewport(0,0,winW,winH);
+     render_new();
+     return;
+
+    if( m_bEnableScissor )     glEnable(GL_SCISSOR_TEST);
 
      QList<QPoint> topLefts;
      topLefts.append(QPoint(0,0));
@@ -291,17 +310,15 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
      bottomRight.append(QPoint(width(),height()));
 
      QList<QRectF> rectFs;
-     rectFs.append(QRectF(0,0,0.5,0.5));
-     //rectFs.append(QRectF(0,0,1.0,1.0));
+     //rectFs.append(QRectF(0,0,0.5,0.5));
+     rectFs.append(QRectF(0,0,1.0,1.0));
      rectFs.append(QRectF(0.5,0,0.5,0.5));
      rectFs.append(QRectF(0,0.5,0.5,0.5));
      rectFs.append(QRectF(0.5,0.5,0.5,0.5));
-    int winW = this->width();
-    int winH = this->height();
 
 
-    context()->makeCurrent(context()->surface());
-    for(int i = 0;i<2;i++){
+//    context()->makeCurrent(context()->surface());
+    for(int i = 0;i<1;i++){
            QRectF tmpRectF = rectFs[i];
            GLint x = winW *tmpRectF.topLeft().x();
            GLint y = winH *tmpRectF.topLeft().y();
@@ -319,8 +336,11 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
 //           }
 
 
-           glViewport(x + 5, tmpY + 5  ,w - 10,h - 10);
+//           glViewport(x + 5, tmpY + 5  ,w - 10,h - 10);
+
+
            if( i == 0 ){
+               glViewport(0,0,winW,winH);
                render_new();
            }else{
                render_new1();
@@ -357,18 +377,23 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
     }
 
 
-    context()->doneCurrent();
+//    context()->doneCurrent();
     if( m_bEnableScissor )
         glDisable(GL_SCISSOR_TEST);
  }
 
+ void ThreadOpenglWidget::timerEvent(QTimerEvent *e)
+ {
+     update();
+ }
+
  void ThreadOpenglWidget::render_new1()
  {
-     if( !m_pBufYuv420p ) return;
+     if( !m_pBufYuv420p1 ) return;
           glActiveTexture(GL_TEXTURE0);//激活纹理单元GL_TEXTURE0
           glBindTexture(GL_TEXTURE_2D,id_yy);
           //使用内存中m_pBufYuv420p数据创建真正的y数据纹理
-          //glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_nVideoW, m_nVideoH, 0, GL_RED, GL_UNSIGNED_BYTE, m_pBufYuv420p);
+          //glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_nVideoWW, m_nVideoHH, 0, GL_RED, GL_UNSIGNED_BYTE, m_pBufYuv420p1);
           glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
           glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
           glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -377,7 +402,7 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
           //加载u数据纹理
           glActiveTexture(GL_TEXTURE1);//激活纹理单元GL_TEXTURE1
           glBindTexture(GL_TEXTURE_2D, id_uu);
-          //glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_nVideoW/2, m_nVideoH/2, 0, GL_RED, GL_UNSIGNED_BYTE, (char*)m_pBufYuv420p+m_nVideoW*m_nVideoH);
+          //glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_nVideoWW/2, m_nVideoHH/2, 0, GL_RED, GL_UNSIGNED_BYTE, (char*)m_pBufYuv420p1+m_nVideoWW*m_nVideoHH);
           glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
           glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
           glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -385,7 +410,7 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
           //加载v数据纹理
           glActiveTexture(GL_TEXTURE2);//激活纹理单元GL_TEXTURE2
           glBindTexture(GL_TEXTURE_2D, id_vv);
-          //glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_nVideoW/2, m_nVideoH/2, 0, GL_RED, GL_UNSIGNED_BYTE, (char*)m_pBufYuv420p+m_nVideoW*m_nVideoH*5/4);
+          //glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_nVideoWW/2, m_nVideoHH/2, 0, GL_RED, GL_UNSIGNED_BYTE, (char*)m_pBufYuv420p1+m_nVideoWW*m_nVideoHH*5/4);
 
           glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
           glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);

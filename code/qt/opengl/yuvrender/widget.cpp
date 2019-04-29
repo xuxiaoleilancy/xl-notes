@@ -37,7 +37,7 @@ void Widget::PlayOneFrame()
     {
         m_pBufYuv420p = new unsigned char[nLen];
         qDebug("CPlayWidget::PlayOneFrame new data memory. Len=%d width=%d height=%d\n",
-               nLen, m_nVideoW, m_nVideoW);
+               nLen, m_nVideoW, m_nVideoH);
     }
     //将一帧yuv图像读到内存中
     if(NULL == m_pYuvFile)

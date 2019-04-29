@@ -7,6 +7,7 @@
 #include <QOpenGLTexture>
 #include <QFile>
 #include <QLabel>
+#include <QElapsedTimer>
 
 #define ATTRIB_VERTEX 3
 #define ATTRIB_TEXTURE 4
@@ -27,7 +28,7 @@ protected:
     void initializeGL() ;
     void resizeGL(int w, int h) ;
     void paintGL() ;
-
+    void timerEvent(QTimerEvent* e);
     void render_new();
     void render_new1();
     GLuint getId_y();
@@ -69,7 +70,8 @@ private:
 
     bool m_bInit;
     QLabel* _pLabel;
-
+    QElapsedTimer _timer;
+    int _iFrame;
     int _iFlag;
 };
 
