@@ -37,6 +37,9 @@ int main(int argc, char **argv)
 
     QSurfaceFormat format;
     format.setSamples(16);
+    format.setSwapInterval(0);
+
+    QSurfaceFormat::setDefaultFormat(format);
 
     TriangleWindow window;
     window.setFormat(format);
@@ -50,7 +53,7 @@ int main(int argc, char **argv)
     app.exec();
     qint64 totalTime =timer.elapsed();
     int totalFrame = window.totalFrames();
-    float fFps = 1.0 * totalTime / totalFrame;
+    float fFps = 1.0* totalFrame / totalTime * 1000;
     qDebug()<<" totalTime="<< totalTime <<"  ,totalFrame="<< window.totalFrames()<<",fps="<<fFps <<endl;
     return 0;
 }
@@ -90,7 +93,6 @@ void TriangleWindow::render()
     glClear(GL_COLOR_BUFFER_BIT);
 
     ++m_frame;
-    return;
 
     m_program->bind();
 
