@@ -4,12 +4,17 @@
 #include "threadopenglwidget.h"
 #include "ropengltexture.h"
 #include <QElapsedTimer>
+#include <QSurfaceFormat>
 
 int main(int argc, char *argv[])
 {
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     QApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QApplication a(argc, argv);
+
+    QSurfaceFormat format = QSurfaceFormat::defaultFormat();
+    format.setSwapInterval(0);
+    QSurfaceFormat::setDefaultFormat(format);
 
     YuvThread* t1 = new YuvThread("F://yuvfiles//InToTree_1920x1080.yuv",1920,1080);
     YuvThread* t2 = new YuvThread("F://yuvfiles//CrowdRun_1280x720.yuv",1280,720);
