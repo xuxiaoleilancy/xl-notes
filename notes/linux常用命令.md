@@ -50,3 +50,18 @@ suirui@suirui:~$ lspci -v -s 02:00.0
     Capabilities: <access denied>
     Kernel driver in use: iwlwifi
 ```
+
+
+# 网络相关
+
+## [netstat命令详解](https://www.cnblogs.com/ftl1012/p/netstat.html)
+
+使用示例
+```
+#查看某个端口的链接
+netstat -anlp | grep 9911 
+
+#查看某个ip的链接
+netstat -anlp | grep 10.10.7.41 
+```
+
