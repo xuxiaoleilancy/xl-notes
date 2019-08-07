@@ -3,6 +3,13 @@
 
 #include <QThread>
 #include <QWidget>
+
+class RenderCallback
+{
+public:
+    virtual void onRenderFrame(unsigned char* pData,int w, int h) =0 ;
+};
+
 class YuvThread : public QThread
 {
     Q_OBJECT
@@ -15,6 +22,7 @@ public:
     void run();
     int width(){return m_nVideoW;}
     int height(){return m_nVideoH;}
+    void setCallback(RenderCallback* pCallback);
 signals:
     void newFrame(unsigned char* pData);
 private:
@@ -25,6 +33,7 @@ private:
     FILE* m_pYuvFile;
     QString m_fileName;
     bool m_bStop;
+    RenderCallback* _pCallback;
 };
 class UpdateThread : public QThread
 {

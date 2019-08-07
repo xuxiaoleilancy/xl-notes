@@ -492,6 +492,17 @@ QRect ThreadOpenglWidget::viewPortRect(QRectF rectf, int frameW, int frameH, boo
      update();
  }
 
+#include <QApplication>
+
+ void ThreadOpenglWidget::onRenderFrame(unsigned char *pData, int w, int h)
+ {
+    
+     moveToThread(qApp->thread()->currentThread());
+     m_nVideoW = w;
+     m_nVideoW = h;
+     updateFrame(pData);
+ }
+
  void ThreadOpenglWidget::updateTexture()
  {
     glBindTexture(GL_TEXTURE_2D,getId_y());

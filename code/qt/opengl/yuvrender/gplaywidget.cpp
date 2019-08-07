@@ -92,14 +92,16 @@ void CPlayWidget::initializeGL()
     //初始化顶点着色器 对象
     m_pVSHader = new QOpenGLShader(QOpenGLShader::Vertex, this);
     //顶点着色器源码
-    const char *vsrc = "attribute vec4 vertexIn; \
-    attribute vec2 textureIn; \
-    varying vec2 textureOut;  \
-    void main(void)           \
-    {                         \
-        gl_Position = vertexIn; \
-        textureOut = textureIn; \
-    }";
+    //片段着色器源码
+    const char *vsrc =
+                "attribute vec4 vertexIn; \
+                 attribute vec4 textureIn; \
+                 varying vec4 textureOut;  \
+                 void main(void)           \
+                 {                         \
+                     gl_Position = vertexIn; \
+                     textureOut = textureIn; \
+                 }";
     //编译顶点着色器程序
     bool bCompile = m_pVSHader->compileSourceCode(vsrc);
     if(!bCompile)
@@ -107,23 +109,24 @@ void CPlayWidget::initializeGL()
     }
     //初始化片段着色器 功能gpu中yuv转换成rgb
     m_pFSHader = new QOpenGLShader(QOpenGLShader::Fragment, this);
-    //片段着色器源码
-    const char *fsrc = "varying vec2 textureOut; \
-    uniform sampler2D tex_y; \
-    uniform sampler2D tex_u; \
-    uniform sampler2D tex_v; \
-    void main(void) \
-    { \
-        vec3 yuv; \
-        vec3 rgb; \
-        yuv.x = texture2D(tex_y, textureOut).r; \
-        yuv.y = texture2D(tex_u, textureOut).r - 0.5; \
-        yuv.z = texture2D(tex_v, textureOut).r - 0.5; \
-        rgb = mat3( 1,       1,         1, \
-                    0,       -0.39465,  2.03211, \
-                    1.13983, -0.58060,  0) * yuv; \
-        gl_FragColor = vec4(rgb, 1); \
-    }";
+
+     const char *fsrc =
+                 "varying mediump vec4 textureOut;\n"
+                 "uniform sampler2D textureY;\n"
+                 "uniform sampler2D textureUV;\n"
+                 "void main(void)\n"
+                 "{\n"
+                 "vec3 yuv; \n"
+                 "vec3 rgb; \n"
+                 "yuv.x = texture2D(textureY, textureOut.st).r - 0.0625; \n"
+                 "yuv.y = texture2D(textureUV, textureOut.st).r - 0.5; \n"
+                 "yuv.z = texture2D(textureUV, textureOut.st).g - 0.5; \n"
+                 "rgb = mat3( 1,       1,         1, \n"
+                             "0,       -0.39465,  2.03211, \n"
+                             "1.13983, -0.58060,  0) * yuv; \n"
+                 "gl_FragColor = vec4(rgb, 1); \n"
+                 "}\n";
+
     //将glsl源码送入编译器编译着色器程序
     bCompile = m_pFSHader->compileSourceCode(fsrc);
     if(!bCompile)
@@ -199,25 +202,7 @@ void CPlayWidget::resizeGL(int w, int h)
 }
  void CPlayWidget::paintGL()
  {
-//     QElapsedTimer timer;
-//     timer.start();
-     static int i = 0;
-     i++;
-     qDebug()<<"paintGL : "<<i<<endl;
-    int nLen = 0;
-     if(NULL == m_pBufYuv420p)
-     {
-         m_nVideoW = 1920;
-         m_nVideoH = 1080;
-         nLen = m_nVideoW*m_nVideoH*3/2;
-         m_pBufYuv420p = new unsigned char[nLen];
-
-     }
-     nLen = m_nVideoW*m_nVideoH*3/2;
-     memset(m_pBufYuv420p,i%255,m_nVideoW*m_nVideoH);
-     memset(m_pBufYuv420p+m_nVideoW*m_nVideoH,i*3%255,m_nVideoW*m_nVideoH*1/4);
-     memset(m_pBufYuv420p+m_nVideoW*m_nVideoH*5/4,i*5%255,m_nVideoW*m_nVideoH*1/4);
-    //加载y数据纹理
+     //加载y数据纹理
      //激活纹理单元GL_TEXTURE0
     glActiveTexture(GL_TEXTURE0);
     //使用来自y数据生成纹理
@@ -254,8 +239,6 @@ void CPlayWidget::resizeGL(int w, int h)
     //使用顶点数组方式绘制图形
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-
-    qDebug() << "The paintgl operation took " /*timer.elapsed()*/ << "milliseconds";
     return;
  }
 

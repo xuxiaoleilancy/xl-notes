@@ -8,10 +8,11 @@
 #include <QFile>
 #include <QLabel>
 #include <QElapsedTimer>
+#include "yuvthread.h"
 
 #define ATTRIB_VERTEX 3
 #define ATTRIB_TEXTURE 4
-class ThreadOpenglWidget:public QOpenGLWidget,protected QOpenGLFunctions
+class ThreadOpenglWidget:public QOpenGLWidget,protected QOpenGLFunctions,public RenderCallback
 {
     Q_OBJECT
 public:
@@ -24,6 +25,8 @@ public:
     void updateFrame1(unsigned char* pData);
 
     void setEnableScissor(bool b){ m_bEnableScissor = b;}
+
+     virtual void onRenderFrame(unsigned char* pData,int w, int h);
 protected:
     void initializeGL() ;
     void resizeGL(int w, int h) ;

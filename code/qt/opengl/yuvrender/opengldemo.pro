@@ -17,13 +17,17 @@ SOURCES += main.cpp\
     gplaywidget.cpp \
     yuvthread.cpp \
     threadopenglwidget.cpp \
-    ropengltexture.cpp
+    ropengltexture.cpp \
+    yuvthread_nv12.cpp \
+    nv12renderwidget.cpp
 
 HEADERS  += widget.h \
     gplaywidget.h \
     yuvthread.h \
     threadopenglwidget.h \
-    ropengltexture.h
+    ropengltexture.h \
+    yuvthread_nv12.h \
+    nv12renderwidget.h
 
 FORMS    += widget.ui
 

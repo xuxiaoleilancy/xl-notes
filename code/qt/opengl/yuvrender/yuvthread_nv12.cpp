@@ -1,8 +1,8 @@
-﻿#include "yuvthread.h"
+﻿#include "yuvthread_nv12.h"
 #include <QDebug>
 #include <QDateTime>
 #include <QElapsedTimer>
-YuvThread::YuvThread(QString fileName, int w, int h):QThread(),_pCallback(NULL)
+YuvThreadNV12::YuvThreadNV12(QString fileName, int w, int h):QThread()
 {
     m_fileName = fileName;
     m_pYuvFile = NULL;
@@ -12,7 +12,7 @@ YuvThread::YuvThread(QString fileName, int w, int h):QThread(),_pCallback(NULL)
     m_bStop = false;
 }
 
-YuvThread::~YuvThread()
+YuvThreadNV12::~YuvThreadNV12()
 {
     if( m_pYuvFile ){
         fclose(m_pYuvFile);
@@ -23,7 +23,7 @@ YuvThread::~YuvThread()
     m_pBufYuv420p = NULL;
 }
 
-void YuvThread::run()
+void YuvThreadNV12::run()
 {
     while(!m_bStop){
         PlayOneFrame();
@@ -34,12 +34,8 @@ void YuvThread::run()
     }
 }
 
-void YuvThread::setCallback(RenderCallback *pCallback)
-{
-    _pCallback = pCallback;
-}
 
-void YuvThread::PlayOneFrame()
+void YuvThreadNV12::PlayOneFrame()
 {
     if(NULL == m_pYuvFile)
     {
@@ -85,28 +81,3 @@ void YuvThread::PlayOneFrame()
     emit newFrame(m_pBufYuv420p);
 }
 
-
-
-UpdateThread::UpdateThread(QWidget *pWdg):QThread(),_pWdg(pWdg)
-{
-
-}
-
-UpdateThread::~UpdateThread()
-{
-
-}
-
-void UpdateThread::run()
-{
-    QElapsedTimer timer;
-    timer.start();
-    int i = 0;
-    while( i < 1000 ){
-        qDebug()<<" UpdateThread: i =  "<<i<<endl;
-        i++;
-        emit repaint();
-        msleep(10);
-    }
-    qDebug() << "The updateThread took " << timer.elapsed() << "milliseconds";
-}
